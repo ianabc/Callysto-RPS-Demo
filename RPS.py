@@ -578,6 +578,7 @@ class RPSCanvas:
             y (int): y position of the click
         """
         square = self.xy_to_square(x, y)
+        self.change_square_color(square, "#8ED6FF")
         if self.state[square % self.num_x][square // self.num_x] == 0:
             self.change_square_color(self.prev_square, "white")
             self.prev_square = -1
