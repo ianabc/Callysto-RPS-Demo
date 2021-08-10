@@ -1,0 +1,12 @@
+name: Callysto-RPS-Demo
+channels:
+  - conda-forge
+  - defaults
+  - conda-forge/label/broken
+dependencies:
+  - pandas
+  - ipywidgets
+  - jupyterlab
+  - numpy
+  - ipycanvas
+prefix: /opt/miniconda3/envs/callysto-periodicity
