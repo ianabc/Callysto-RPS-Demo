@@ -337,16 +337,35 @@ def generate_state(num_x, num_y=None):
 
 
 class RPSCanvas:
-    def __init__(self, initial_state, square_size=200, solver=None):
+    def __init__(self, initial_state, square_size=150, solver=None):
         """Initialize rock paper scissors canvas
 
         Args:
-            initial_state (ndarray): 2D numpy array
+            initial_state (ndarray): 2D numpy array or 2D list
             square_size (int, optional): Size of each image in px. Defaults to 200.
             solver (Solver): Solver class. Defaults to None
         """
-        self.initial_state = initial_state
-        self.state = np.copy(initial_state)
+        try:
+            if not isinstance(initial_state, np.ndarray):
+                subs = {
+                    'R' : 1,
+                    'P' : 2,
+                    'S' : 3,
+                }
+                for r, row in enumerate(initial_state):
+                    for c, item in enumerate(row):
+                        item = item.upper()[0] if isinstance(item, str) else item
+                        initial_state[r][c] = subs.get(item, item)
+                initial_state = np.array(initial_state, dtype=int)
+        except AttributeError as err:
+            raise ValueError(
+                "You must specify a 2d array of Rock, Paper, Scissors objects as 'R', 'P' or 'S'\n"
+                "\n"
+                "  e.g. [['R', 'P', 'R'], ['S', 'P', 'P'], ['R', 'R', 'S']]"
+            )
+
+        self.initial_state = initial_state.T
+        self.state = np.copy(self.initial_state)
         self.prev_states = []
         self.square_size = square_size
         self.solver = solver
