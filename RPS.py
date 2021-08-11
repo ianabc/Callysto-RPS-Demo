@@ -26,6 +26,7 @@ class Solver:
         # If a state is not solvable, the value is an empty string
         self.solve_list = [{} for _ in range(dim1 * dim2 - 1)]
 
+
     def add_solution(self, ans_list):
         """Adds list of states from generate_state as a possible solution
 
@@ -456,7 +457,7 @@ class RPSCanvas:
         Returns:
             int: square number from 0 to num_x*num_y
         """
-        return y // self.square_size * self.num_x + x // self.square_size
+        return int(y // self.square_size * self.num_x + x // self.square_size)
 
     def draw_img(self, square):
         """Draw image on square based on current state
@@ -578,7 +579,6 @@ class RPSCanvas:
             y (int): y position of the click
         """
         square = self.xy_to_square(x, y)
-        self.change_square_color(square, "#8ED6FF")
         if self.state[square % self.num_x][square // self.num_x] == 0:
             self.change_square_color(self.prev_square, "white")
             self.prev_square = -1
