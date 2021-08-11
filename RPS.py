@@ -364,8 +364,8 @@ class RPSCanvas:
                 "  e.g. [['R', 'P', 'R'], ['S', 'P', 'P'], ['R', 'R', 'S']]"
             )
 
-        self.initial_state = initial_state.T
-        self.state = np.copy(self.initial_state)
+        self.initial_state = initial_state.T.copy()
+        self.state = self.initial_state.copy()
         self.prev_states = []
         self.square_size = square_size
         self.solver = solver
